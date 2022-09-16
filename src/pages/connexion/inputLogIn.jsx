@@ -1,24 +1,23 @@
+import 'primeicons/primeicons.css';
+import 'primereact/resources/themes/lara-light-indigo/theme.css';
+import 'primereact/resources/primereact.css';
+import 'primeflex/primeflex.css';
+
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { Password } from 'primereact/password';
-import { Checkbox } from 'primereact/checkbox';
 import { Dialog } from 'primereact/dialog';
-import { Divider } from 'primereact/divider';
 import { classNames } from 'primereact/utils';
-import '../styles/inputSignUp.css';
+import '../../styles/connexion.css';
 
-function InputSignUp() {
+function InputLogIn() {
   const [showMessage, setShowMessage] = useState(false);
-  const [formData, setFormData] = useState({});
+  const [setFormData] = useState({});
   const defaultValues = {
-    name: '',
     email: '',
     password: '',
-    date: null,
-    country: null,
-    accept: false,
   };
 
   const {
@@ -51,19 +50,6 @@ function InputSignUp() {
       />
     </div>
   );
-  const passwordHeader = <h6>Pick a password</h6>;
-  const passwordFooter = (
-    <React.Fragment>
-      <Divider />
-      <p className="mt-2">Suggestions</p>
-      <ul className="pl-2 ml-2 mt-0" style={{ lineHeight: '1.5' }}>
-        <li>At least one lowercase</li>
-        <li>At least one uppercase</li>
-        <li>At least one numeric</li>
-        <li>Minimum 8 characters</li>
-      </ul>
-    </React.Fragment>
-  );
 
   return (
     <div className="form-demo">
@@ -81,45 +67,14 @@ function InputSignUp() {
             className="pi pi-check-circle"
             style={{ fontSize: '5rem', color: 'var(--green-500)' }}
           ></i>
-          <h5>Registration Successful!</h5>
-          <p style={{ lineHeight: 1.5, textIndent: '1rem' }}>
-            Your account is registered under name <b>{formData.name}</b> ; it'll
-            be valid next 30 days without activation. Please check{' '}
-            <b>{formData.email}</b> for activation instructions.
-          </p>
+          <h5>Login Successful!</h5>
         </div>
       </Dialog>
 
       <div className="flex justify-content-center">
         <div className="card">
-          <h5 className="text-center">Register</h5>
+          <h5 className="text-center">LogIn</h5>
           <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
-            <div className="field">
-              <span className="p-float-label">
-                <Controller
-                  name="name"
-                  control={control}
-                  rules={{ required: 'Name is required.' }}
-                  render={({ field, fieldState }) => (
-                    <InputText
-                      id={field.name}
-                      {...field}
-                      autoFocus
-                      className={classNames({
-                        'p-invalid': fieldState.invalid,
-                      })}
-                    />
-                  )}
-                />
-                <label
-                  htmlFor="name"
-                  className={classNames({ 'p-error': errors.name })}
-                >
-                  Name*
-                </label>
-              </span>
-              {getFormErrorMessage('name')}
-            </div>
             <div className="field">
               <span className="p-float-label p-input-icon-right">
                 <i className="pi pi-envelope" />
@@ -166,8 +121,6 @@ function InputSignUp() {
                       className={classNames({
                         'p-invalid': fieldState.invalid,
                       })}
-                      header={passwordHeader}
-                      footer={passwordFooter}
                     />
                   )}
                 />
@@ -180,21 +133,6 @@ function InputSignUp() {
               </span>
               {getFormErrorMessage('password')}
             </div>
-            <div className="field-checkbox">
-              <Controller
-                name="accept"
-                control={control}
-                rules={{ required: true }}
-                render={({ field, fieldState }) => (
-                  <Checkbox
-                    inputId={field.name}
-                    onChange={(e) => field.onChange(e.checked)}
-                    checked={field.value}
-                    className={classNames({ 'p-invalid': fieldState.invalid })}
-                  />
-                )}
-              />
-            </div>
 
             <Button type="submit" label="Submit" className="mt-2" />
           </form>
@@ -203,5 +141,4 @@ function InputSignUp() {
     </div>
   );
 }
-
-export default InputSignUp;
+export default InputLogIn;
