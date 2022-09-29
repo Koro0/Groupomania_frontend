@@ -12,14 +12,13 @@ import { Dialog } from 'primereact/dialog';
 import { classNames } from 'primereact/utils';
 import '../../styles/connexion.css';
 
-function InputLogIn() {
+export default function Login() {
   const [showMessage, setShowMessage] = useState(false);
-  const [setFormData] = useState({});
   const defaultValues = {
     email: '',
     password: '',
   };
-
+  
   const {
     control,
     formState: { errors },
@@ -28,8 +27,22 @@ function InputLogIn() {
   } = useForm({ defaultValues });
 
   const onSubmit = (data) => {
-    setFormData(data);
     setShowMessage(true);
+    
+    fetch('http://localhost:3000/api/auth/login', {
+      method: 'POST', 
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Success:', data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
 
     reset();
   };
@@ -50,6 +63,8 @@ function InputLogIn() {
       />
     </div>
   );
+
+
 
   return (
     <div className="form-demo">
@@ -134,11 +149,10 @@ function InputLogIn() {
               {getFormErrorMessage('password')}
             </div>
 
-            <Button type="submit" label="Submit" className="mt-2" />
+            <Button type="submit" label="Login" className="mt-2" />
           </form>
         </div>
       </div>
     </div>
   );
 }
-export default InputLogIn;
