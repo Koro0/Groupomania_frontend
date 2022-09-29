@@ -1,12 +1,23 @@
-import { Link } from 'react-router-dom'
+import { Dialog } from 'primereact/dialog';
+import React, { useState } from 'react';
+import Login from '../../pages/connexion/inputLogIn';
+import Register from '../../pages/registre/inputSignUp'
 
-function Header() {
+
+export default function Header() {
+  const [displayLogin, setDisplayLogin] = useState(false);
+  const [displayRegister, setDisplayRegister] = useState(false);
+
   return (
     <nav>
-      <Link to="/">Login</Link>
-      <Link to="/registre">Registre</Link>
+      <button onClick={() => setDisplayLogin(true)}>Login</button>
+      <Dialog header="Login" visible={displayLogin} style={{ width: '50vw' }} onHide={() => setDisplayLogin(false)}>
+        <Login />
+      </Dialog>
+      <button onClick={() => setDisplayRegister(true)}>Register</button>
+      <Dialog header="Register" visible={displayRegister} style={{ width: '50vw' }} onHide={() => setDisplayRegister(false)}>
+        <Register />
+      </Dialog>
     </nav>
   )
 }
-
-export default Header
