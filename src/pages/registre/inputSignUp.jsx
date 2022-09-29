@@ -13,7 +13,7 @@ import { Divider } from 'primereact/divider';
 import { classNames } from 'primereact/utils';
 import '../../styles/connexion.css';
 
-function InputSignUp() {
+export default function InputSignUp() {
   const [showMessage, setShowMessage] = useState(false);
   const [formData, setFormData] = useState({});
   const defaultValues = {
@@ -25,14 +25,25 @@ function InputSignUp() {
     control,
     formState: { errors },
     handleSubmit,
-    reset,
   } = useForm({ defaultValues });
 
   const onSubmit = (data) => {
     setFormData(data);
     setShowMessage(true);
-
-    reset();
+    fetch('http://localhost:3000/api/auth/signup', {
+      method: 'POST', 
+      headers: {
+        'Content-Type': 'application/json', 
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Success:', data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });;
   };
 
   const getFormErrorMessage = (name) => {
@@ -162,4 +173,3 @@ function InputSignUp() {
     </div>
   );
 }
-export default InputSignUp;
