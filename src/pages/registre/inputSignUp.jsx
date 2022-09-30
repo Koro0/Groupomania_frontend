@@ -30,11 +30,9 @@ export default function InputSignUp() {
   const onSubmit = (data) => {
     setFormData(data);
     setShowMessage(true);
+    data.admin = false;
     fetch('http://localhost:3000/api/auth/signup', {
-      method: 'POST', 
-      headers: {
-        'Content-Type': 'application/json', 
-      },
+      method: 'POST',
       body: JSON.stringify(data),
     })
       .then((response) => response.json())
@@ -94,9 +92,7 @@ export default function InputSignUp() {
           ></i>
           <h5>Registration Successful!</h5>
           <p style={{ lineHeight: 1.5, textIndent: '1rem' }}>
-            Your account is registered under name <b>{formData.name}</b> ; it'll
-            be valid next 30 days without activation. Please check{' '}
-            <b>{formData.email}</b> for activation instructions.
+            Your account is registered under Email <b>{formData.email}</b>!
           </p>
         </div>
       </Dialog>
