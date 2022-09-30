@@ -47,6 +47,16 @@ export default function Login() {
     reset();
   };
 
+  function redirect() {
+    window.location.href =
+      window.location.origin + '/home'
+  }
+
+  const handleSubmitButton = () => {
+    setShowMessage(false);
+    redirect()
+  }
+
   const getFormErrorMessage = (name) => {
     return (
       errors[name] && <small className="p-error">{errors[name].message}</small>
@@ -70,7 +80,7 @@ export default function Login() {
     <div className="form-demo">
       <Dialog
         visible={showMessage}
-        onHide={() => setShowMessage(false)}
+        onHide={() => handleSubmitButton()}
         position="top"
         footer={dialogFooter}
         showHeader={false}
