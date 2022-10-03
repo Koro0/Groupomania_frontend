@@ -30,10 +30,13 @@ export default function InputSignUp() {
   const onSubmit = (data) => {
     setFormData(data);
     setShowMessage(true);
-    data.admin = false;
     fetch('http://localhost:3000/api/auth/signup', {
       method: 'POST',
       body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
     })
       .then((response) => response.json())
       .then((data) => {
