@@ -39,6 +39,7 @@ export default function Login() {
       .then((response) => response.json())
       .then((data) => {
         console.log('Success:', data);
+        localStorage.setItem('connect',JSON.stringify(data));
       })
       .catch((error) => {
         console.error('Error:', error);
