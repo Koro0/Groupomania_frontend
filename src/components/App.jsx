@@ -12,8 +12,8 @@ function App() {
           <Header />
         </header>
       </div>
-
     </Router>
+    
 
   );
 }

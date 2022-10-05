@@ -21,3 +21,6 @@ export default function Header() {
     </nav>
   )
 }
+// tranferrer sur une nouvelle page
+// creer un nouveau Header ou 
+// masquer le header apres connexion, afficher une nav bar pour comte et deconnexion
