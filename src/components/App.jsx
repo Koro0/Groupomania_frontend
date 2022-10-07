@@ -1,19 +1,16 @@
-import { BrowserRouter as Router } from 'react-router-dom';
-import logo from '../assets/logo.png';
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import '../styles/App.css';
 import Header from './Header';
+import Home from './Home/Home'
+
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>Connectez vous</p>
-          <Header />
-        </header>
-      </div>
-    </Router>
-    
+    <BrowserRouter>
+      <Header />
+      <Routes>
+        <Route path='/Home' element={<Home />} />
+      </Routes>
+    </BrowserRouter>
 
   );
 }
