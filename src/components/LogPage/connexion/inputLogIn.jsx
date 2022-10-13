@@ -18,7 +18,7 @@ export default function Login() {
     email: '',
     password: '',
   };
-  
+
   const {
     control,
     formState: { errors },
@@ -28,9 +28,9 @@ export default function Login() {
 
   const onSubmit = (data) => {
     setShowMessage(true);
-    
+
     fetch('http://localhost:3000/api/auth/login', {
-      method: 'POST', 
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -39,7 +39,7 @@ export default function Login() {
       .then((response) => response.json())
       .then((data) => {
         console.log('Success:', data);
-        localStorage.setItem('connect',JSON.stringify(data));
+        localStorage.setItem('connect', JSON.stringify(data));
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -48,10 +48,7 @@ export default function Login() {
     reset();
   };
 
-  function redirect() {
-    window.location.href =
-      window.location.origin + '/home'
-  }
+
 
   const handleSubmitButton = () => {
     setShowMessage(false);
