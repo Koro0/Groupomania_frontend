@@ -3,6 +3,7 @@ import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.css';
 import 'primeflex/primeflex.css';
 
+import { Navigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { InputText } from 'primereact/inputtext';
@@ -10,14 +11,17 @@ import { Button } from 'primereact/button';
 import { Password } from 'primereact/password';
 import { Dialog } from 'primereact/dialog';
 import { classNames } from 'primereact/utils';
-import '../../styles/connexion.css';
+import '../../../styles/connexion.css';
 
 export default function Login() {
   const [showMessage, setShowMessage] = useState(false);
+
   const defaultValues = {
     email: '',
     password: '',
   };
+
+
 
   const {
     control,
@@ -26,9 +30,16 @@ export default function Login() {
     reset,
   } = useForm({ defaultValues });
 
-  const onSubmit = (data) => {
-    setShowMessage(true);
+  const [goToHome, setgoToHome] = useState(false);
+  if (goToHome) {
+    return <Navigate to='/Home' />
+  }
 
+  /**
+   * 
+   * @param {Call API} data 
+   */
+  const onSubmit = (data) => {
     fetch('http://localhost:3000/api/auth/login', {
       method: 'POST',
       headers: {
@@ -40,9 +51,11 @@ export default function Login() {
       .then((data) => {
         console.log('Success:', data);
         localStorage.setItem('connect', JSON.stringify(data));
+        setShowMessage(true);
       })
       .catch((error) => {
         console.error('Error:', error);
+
       });
 
     reset();
@@ -52,7 +65,6 @@ export default function Login() {
 
   const handleSubmitButton = () => {
     setShowMessage(false);
-    redirect()
   }
 
   const getFormErrorMessage = (name) => {
@@ -61,14 +73,19 @@ export default function Login() {
     );
   };
 
+  //const navigate = useNavigate();
+  const handleOnClick = () => {
+    setShowMessage(false);
+    setgoToHome(true);
+  };
   const dialogFooter = (
     <div className="flex justify-content-center">
       <Button
         label="OK"
         className="p-button-text"
         autoFocus
-        onClick={() => setShowMessage(false)}
-      />
+        onClick={() => handleOnClick()}
+      />,
     </div>
   );
 
@@ -93,6 +110,7 @@ export default function Login() {
           <h5>Login Successful!</h5>
         </div>
       </Dialog>
+
 
       <div className="flex justify-content-center">
         <div className="card">
