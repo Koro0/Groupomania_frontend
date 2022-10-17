@@ -1,23 +1,14 @@
-import { Dialog } from 'primereact/dialog';
-import React, { useState } from 'react';
-import Login from '../../pages/connexion/inputLogIn';
-import Register from '../../pages/registre/inputSignUp'
-
+import React from 'react';
+import Navbar from './Navbar'
 
 export default function Header() {
-  const [displayLogin, setDisplayLogin] = useState(false);
-  const [displayRegister, setDisplayRegister] = useState(false);
 
   return (
-    <nav>
-      <button onClick={() => setDisplayLogin(true)}>Login</button>
-      <Dialog header="Login" visible={displayLogin} style={{ width: '50vw' }} onHide={() => setDisplayLogin(false)}>
-        <Login />
-      </Dialog>
-      <button onClick={() => setDisplayRegister(true)}>Register</button>
-      <Dialog header="Register" visible={displayRegister} style={{ width: '50vw' }} onHide={() => setDisplayRegister(false)}>
-        <Register />
-      </Dialog>
-    </nav>
+    <div div className="App" >
+      <header className="App-header">
+        <Navbar />
+      </header>
+    </div>
+
   )
 }
