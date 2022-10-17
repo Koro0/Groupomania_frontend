@@ -13,10 +13,10 @@ export default function LogPage() {
     return (
 
         <div div className="App" >
-            <header className="App-header">
+            <div className="">
                 <img src={logo} className="App-logo" alt="logo" />
                 <p>Connectez vous</p>
-                <nav>
+                <div>
                     <button onClick={() => setDisplayLogin(true)}>Login</button>
                     <Dialog header="Login" visible={displayLogin} style={{ width: '50vw' }} onHide={() => setDisplayLogin(false)}>
                         <Login />
@@ -25,8 +25,8 @@ export default function LogPage() {
                     <Dialog header="Register" visible={displayRegister} style={{ width: '50vw' }} onHide={() => setDisplayRegister(false)}>
                         <Register />
                     </Dialog>
-                </nav>
-            </header>
+                </div>
+            </div>
         </div>
     )
 }
