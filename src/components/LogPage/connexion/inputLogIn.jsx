@@ -1,8 +1,3 @@
-import 'primeicons/primeicons.css';
-import 'primereact/resources/themes/lara-light-indigo/theme.css';
-import 'primereact/resources/primereact.css';
-import 'primeflex/primeflex.css';
-
 import { Navigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
@@ -50,7 +45,7 @@ export default function Login() {
       .then((response) => response.json())
       .then((data) => {
         console.log('Success:', data);
-        localStorage.setItem('connect', JSON.stringify(data));
+        localStorage.setItem('connect', data.token);
         setShowMessage(true);
       })
       .catch((error) => {
@@ -64,7 +59,7 @@ export default function Login() {
 
 
   const handleSubmitButton = () => {
-    setShowMessage(false);
+    setShowMessage(true);
   }
 
   const getFormErrorMessage = (name) => {
